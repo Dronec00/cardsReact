@@ -1,6 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import Cards from './Components/Cards';
+import Cards from './Components/Cards/Cards';
 
 function App() {
   return (
