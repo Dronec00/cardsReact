@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {useLogic} from '../useLogic';
+import { useEffect, memo } from 'react';
+import { useLogic } from '../useLogic';
 import Card from '../Card/Card';
-import './cards.css';
+import './cards.scss';
 
 interface Card {
     id: number,
@@ -10,20 +10,26 @@ interface Card {
     win: boolean
 }
 
-const Cards: React.FC = () => {
-    const { cardsItems, generate, check } = useLogic();
+const Cards = () => {
+    const { cardsItems, generate, cardsWins, lifeMinus, lifePlus, lifeCount } = useLogic();
+
     useEffect(()=>{
-        generate(null)
+        generate(null);
     },[]);
-    return (
-        <div className='cards'>
-            {cardsItems.map((card: Card) => {
-                return (
-                    <Card key={card.id} {...card} />
-                    );
-            })}
+    return <>
+        <p>Жизни: {lifeCount}</p>
+        <div className= "cards">
+                {cardsItems.map((card) => <Card key={card.id}
+                                                {...card}
+                                                generate = {generate}
+                                                cardsWins = {cardsWins}
+                                                lifeMinus = {lifeMinus}
+                                                lifePlus = {lifePlus}
+                                                lifeCount = {lifeCount}
+                /> )}
         </div>
-    );
+    </>
+        ;
 };
 
-export default Cards;
+export default memo(Cards);

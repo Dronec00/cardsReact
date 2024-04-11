@@ -1,32 +1,43 @@
-import {useState} from 'react';
-import {useLogic} from '../useLogic';
+import { useState, memo } from 'react';
 
-interface CardProps {
+interface IProps {
+    id: number,
+    lifeCount: number,
     minus: boolean,
     plus: boolean,
-    win: boolean
-}
+    win: boolean,
+    generate: (id: number | null) => void,
+    lifeMinus: () => void,
+    lifePlus: () => void,
+    cardsWins: number[]
+};
 
-const Card: React.FC<CardProps> = ({ plus, minus, win }) => {
-    const [classNames, setClassNames] = useState<string>('cards__item');
-    const {generate} = useLogic()
-    const HandleClick = () => {
-        if(plus) {
-            setClassNames('cards__item cards__item_plus')
+const Card = ({id, plus, minus, win, generate, cardsWins, lifeMinus, lifePlus}: IProps) => {
+    const [classNames, setClassNames] = useState<string>("cards__item");
+
+    const handleClick = () => {
+        switch (true) {
+            case plus:
+                setClassNames("cards__item cards__item_plus");
+                lifePlus();
+                generate(null);
+                break;
+            case minus:
+                setClassNames("cards__item cards__item_minus");
+                lifeMinus();
+                generate(null);
+                break;
+            case (win && !cardsWins.includes(id)):
+                setClassNames("cards__item cards__item_win");
+                generate(id);
+                break;
         };
-        if(minus) {
-            setClassNames('cards__item cards__item_minus' )
-        };
-        if(win) {
-            setClassNames('cards__item cards__item_win')
-        };
-        setTimeout(()=>{
-            setClassNames('cards__item');
-            generate(null); // не работает почему-то
+        setTimeout(() => {
+            if (!win)
+                setClassNames("cards__item");
         }, 500);
-
     };
-    return <button className={classNames} onClick={HandleClick} ></button>
-}
+    return <button className={classNames} onClick={handleClick} ></button>
+};
 
-export default Card
+export default memo(Card);

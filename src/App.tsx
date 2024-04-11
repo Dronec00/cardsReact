@@ -1,11 +1,10 @@
-import React, {useEffect} from 'react';
 import './App.css';
 import Cards from './Components/Cards/Cards';
 
 function App() {
-  return (
+    return (
     <div className="App">
-      <Cards />
+        <Cards />
     </div>
   );
 }
