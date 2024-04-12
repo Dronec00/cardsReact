@@ -5,12 +5,11 @@ import './cards.scss';
 
 const Cards = () => {
     const { cardsItems, updateCardOutcomes, cardsWins, lifeMinus, lifePlus, lifeCount, isGameOver } = Logic();
-    console.log(cardsWins);
+
     const isWin = cardsWins.length === 3;
     const isLose = lifeCount === 0;
     const endGame = isWin || isLose;
 
-    console.log(isWin)
     useEffect(()=>{
         updateCardOutcomes(null);
     },[endGame]); // генерируем значения карточек при монтировании Cards и когда заканчиваем игру каким-то образом

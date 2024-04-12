@@ -15,7 +15,7 @@ interface IProps {
 
 const Card = ({id, plus, minus, win, updateCardOutcomes, cardsWins, lifeMinus, lifePlus}: IProps) => {
     const [classNames, setClassNames] = useState<string>("cards__item");
-    console.log(cardsWins)
+
     const handleClick = () => {
         switch (true) {
             case plus:
@@ -33,12 +33,13 @@ const Card = ({id, plus, minus, win, updateCardOutcomes, cardsWins, lifeMinus, l
                 updateCardOutcomes(id);
                 break;
         };
+
         setTimeout(() => {
             if (!win)
                 setClassNames("cards__item");
         }, 500);
     };
-    return <button className={classNames} onClick={handleClick} ></button>
+    return <button className={classNames} onClick={handleClick} ></button>;
 };
 
 export default memo(Card);
