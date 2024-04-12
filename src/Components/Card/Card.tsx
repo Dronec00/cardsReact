@@ -6,30 +6,32 @@ interface IProps {
     minus: boolean,
     plus: boolean,
     win: boolean,
-    generate: (id: number | null) => void,
+
+    updateCardOutcomes: (id: number | null) => void,
     lifeMinus: () => void,
     lifePlus: () => void,
+
     cardsWins: number[]
 };
 
-const Card = ({id, plus, minus, win, generate, cardsWins, lifeMinus, lifePlus}: IProps) => {
+const Card = ({id, plus, minus, win, updateCardOutcomes, cardsWins, lifeMinus, lifePlus}: IProps) => {
     const [classNames, setClassNames] = useState<string>("cards__item");
-
+    console.log(cardsWins)
     const handleClick = () => {
         switch (true) {
             case plus:
                 setClassNames("cards__item cards__item_plus");
                 lifePlus();
-                generate(null);
+                updateCardOutcomes(null);
                 break;
             case minus:
                 setClassNames("cards__item cards__item_minus");
                 lifeMinus();
-                generate(null);
+                updateCardOutcomes(null);
                 break;
             case (win && !cardsWins.includes(id)):
                 setClassNames("cards__item cards__item_win");
-                generate(id);
+                updateCardOutcomes(id);
                 break;
         };
         setTimeout(() => {
