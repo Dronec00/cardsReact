@@ -6,12 +6,11 @@ interface IProps {
     minus: boolean,
     plus: boolean,
     win: boolean,
+    cardsWins: number[],
 
     updateCardOutcomes: (id: number | null) => void,
     lifeMinus: () => void,
     lifePlus: () => void,
-
-    cardsWins: number[]
 };
 
 const Card = ({id, plus, minus, win, updateCardOutcomes, cardsWins, lifeMinus, lifePlus}: IProps) => {
