@@ -1,4 +1,4 @@
-import { useEffect, memo } from 'react';
+import React, { useEffect, memo } from 'react';
 import { Logic } from '../Logic';
 import Card from '../Card/Card';
 import './cards.scss';
@@ -21,15 +21,12 @@ const Cards = () => {
     return <>
         <p>Жизни: {lifeCount}</p>
         <div className= "cards">
-            {endGame
-                ?
-                cardsItems.map((card) => <button key={card.id} className="cards__item"></button> )
-                :
-                cardsItems.map((card) => <Card key={card.id} {...card} updateCardOutcomes = {updateCardOutcomes} cardsWins = {cardsWins} lifeMinus = {lifeMinus} lifePlus = {lifePlus} lifeCount = {lifeCount} />)
+            { endGame
+                ? cardsItems.map((card) => <button key={card.id} className="cards__item"></button> )
+                : cardsItems.map((card) => <Card key={card.id} {...card} updateCardOutcomes = {updateCardOutcomes} cardsWins = {cardsWins} lifeMinus = {lifeMinus} lifePlus = {lifePlus} lifeCount = {lifeCount} />)
             }
         </div>
-    </>
-        ;
+    </>;
 };
 
 export default memo(Cards);
