@@ -1,0 +1,31 @@
+.cards {
+  display: grid;
+  grid-template-rows: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+}
+
+.cards__item {
+  height: 200px;
+  width: 133px;
+  background-image: url(../../img/playing-cards-back-side-60x90-mm-black-and-white-400-15135550.jpeg);
+  transition: transform .5s ease;
+}
+
+.cards__item_plus {
+  transform: rotateY(180deg);
+  background-image: url(../../img/heart.jpeg);
+  background-repeat: no-repeat;
+}
+
+.cards__item_minus {
+  transform: rotateY(180deg);
+  background-image: url(../../img/crossHeart.jpeg);
+  background-repeat: no-repeat;
+}
+
+.cards__item_win {
+  transform: rotateY(180deg);
+  background-image: url(../../img/win.png);
+  background-repeat: no-repeat;
+}
